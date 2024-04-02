@@ -181,7 +181,7 @@ Do nothing if N is zero."
 	   (right (nth 2 edges))
 	   (bottom (nth 3 edges))
 	   ;; Scaling by 0.72-0.77 works good for me with DPI 140 for me.
-	   ;; my-dpi is from https://emacs.stackexchange.com/a/36074
+	   ;; my-dpi: give 96 or 140 depending on width of monitor
 	   (myscale (if (> (my-dpi) 130) 0.76 1))
 	   (wid (* (- right left) myscale))
 	   (ht  (* (- bottom top) myscale))
