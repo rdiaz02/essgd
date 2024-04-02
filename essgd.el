@@ -180,14 +180,15 @@ Do nothing if N is zero."
 	   (top (nth 1 edges))
 	   (right (nth 2 edges))
 	   (bottom (nth 3 edges))
-	   (wid (- right left))
-	   (ht  (- bottom top))
+	   ;; Scaling by 0.75 works for me. No idea why.
+	   (wid (* (- right left) 0.75))
+	   (ht  (* (- bottom top) 0.75))
 	   img
 	   (cmd1
 	    (format
 	     "curl -s '%s/plot?index=%d&width=%d&height=%d&%s' > %s"
 	     essgd-url (1- n) wid ht essgd-token essgd-latest)))
-    
+      
       (when essgd-debug (message cmd1))
       (when essgd-debug  (message "inside size %d x %d " wid ht))
       (shell-command-to-string cmd1)
