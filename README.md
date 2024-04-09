@@ -1,5 +1,8 @@
 # essgd
 
+[![MELPA](https://melpa.org/packages/essgd-badge.svg)](https://melpa.org/#/essgd)
+
+
 This is an add-on to Emacs Speak Statistics (ESS) to display R
 plots within a buffer.
 
@@ -8,6 +11,7 @@ plots within a buffer.
 
 ## Installation
 
+The recommended way to install the package is via MELPA.
 
 If you use the straight package:
 ```
