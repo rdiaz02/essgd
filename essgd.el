@@ -33,6 +33,10 @@
 ;; been tested on Emacs 29.2.  It requires a recent version of two
 ;; packages: ESS and websocket.  Both of these packages are available
 ;; from MELPA.
+;; 
+;; Your version of Emacs must be compiled with native JSON support.  To check
+;; this, check that the feature JSON is included in the variable
+;; `system-configuration-features'.
 ;;
 ;; Using the code
 ;;
@@ -112,11 +116,10 @@ This allows us to respond automatically to new plots."
 	 (active (plist-get json-plist :active)))
     (when active
       (with-current-buffer essgd-buffer
-	(unless (member possible-plot essgd-plot-nums)
-	  (setq-local essgd-plot-nums (essgd-get-plot-nums))
-	  (setq-local essgd-cur-plot possible-plot)
-	  (essgd-debug  (message "cur plot is %d" essgd-cur-plot))
-	  (essgd-show-plot-n  possible-plot))))))
+	(setq-local essgd-plot-nums (essgd-get-plot-nums))
+	(setq-local essgd-cur-plot possible-plot)
+	(essgd-debug (message "cur plot is %d" essgd-cur-plot))
+	(essgd-show-plot-n possible-plot)))))
 
 ;; API:
 ;; https://cran.r-project.org/web/packages/httpgd/vignettes/c01_httpgd-api.html
