@@ -206,9 +206,11 @@ Do nothing if N is zero."
 	   ;; Scaling by 0.72-0.77 works for me with DPI 140.
 	   ;; my-dpi: give 96 or 140 depending on width of monitor
 	   ;; But that is unflexible.
-	   (myscale (if (> (my-dpi-from-xrdb) 130) 0.76 1))
-	   (myscale (eq ( (my-dpi-from-xrdb) 120) 0.85 1))
-	   (myscale (eq ( (my-dpi-from-xrdb) 96) 1.00 1))
+	   (myscale (cond ((> (my-dpi-from-xrdb) 130) 0.76)
+			  ((eq (my-dpi-from-xrdb) 120) 0.92)
+			  ((eq (my-dpi-from-xrdb) 110) 0.99)
+			  (t 1)
+			  ))
 	   (wid (* (- right left) myscale))
 	   (ht  (* (- bottom top) myscale))
 	   img
