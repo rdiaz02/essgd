@@ -28,12 +28,12 @@
 ;; Emacs buffer.
 ;;
 ;; Prerequisites
-;; 
+;;
 ;; R: You will need to install httpgd from CRAN.  Emacs: This code has
 ;; been tested on Emacs 29.2.  It requires a recent version of two
 ;; packages: ESS and websocket.  Both of these packages are available
 ;; from MELPA.
-;; 
+;;
 ;; Your version of Emacs must be compiled with native JSON support.  To check
 ;; this, check that the feature JSON is included in the variable
 ;; `system-configuration-features'.
@@ -46,7 +46,7 @@
 ;; You can navigate through the plot history using p, n keys.  Press
 ;; r to refresh the buffer if a plot doesn't appear correctly.  Press
 ;; q to quit the buffer and close the R device.
-;; 
+;;
 ;; Acknowledgements
 ;;
 ;; Thanks to Florian Rupprecht for help getting started with the httpgd()
@@ -159,7 +159,7 @@ The initial size of the plot is half the current window."
 
     ;; if minibuffer changes size, then we might get a dynamic resize!
     (setq-local resize-mini-windows nil)
-    
+
     (string-match "\\(http://[0-9.:]+\\)/live\\?token=\\(.+\\)" start-output)
     ;; TODO - check case when token is missing.
     ;; TODO - error check if URL ccannot be found.
@@ -171,7 +171,7 @@ The initial size of the plot is half the current window."
     (setq essgd-cur-plot
 	  (length essgd-plot-nums))
     (setq essgd-latest (make-temp-file "essgd" nil ".svg"))
-    
+
     (display-buffer buf)
     (setq-local window-size-change-functions '(essgd-window-size-change))
     (when (> essgd-cur-plot 0)
@@ -205,7 +205,10 @@ Do nothing if N is zero."
 	   (bottom (nth 3 edges))
 	   ;; Scaling by 0.72-0.77 works for me with DPI 140.
 	   ;; my-dpi: give 96 or 140 depending on width of monitor
-	   (myscale (if (> (my-dpi) 130) 0.76 1))
+	   ;; But that is unflexible.
+	   (myscale (if (> (my-dpi-from-xrdb) 130) 0.76 1))
+	   (myscale (eq ( (my-dpi-from-xrdb) 120) 0.85 1))
+	   (myscale (eq ( (my-dpi-from-xrdb) 96) 1.00 1))
 	   (wid (* (- right left) myscale))
 	   (ht  (* (- bottom top) myscale))
 	   img
